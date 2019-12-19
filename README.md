@@ -131,7 +131,7 @@ save_dt(g, 'output/g.png')
     
 
 
-![png](output_8_2.png)
+![png](output_6_2.png)
 
 
 the default arguments will be `dpi=600, bbox_inches: 'tight'`. And it will try to close the fig after saving the file.
