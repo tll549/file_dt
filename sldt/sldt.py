@@ -1,9 +1,8 @@
 import os
 import re
 import pandas as pd
-from datetime import *
+import datetime
 import logging
-
 import pickle
 
 
@@ -27,7 +26,7 @@ def sep_path_name_ext(path_name_ext):
 def append_dt(path_name_ext, datetime_format):
 	path, name, ext = sep_path_name_ext(path_name_ext)
 
-	datetime_now = datetime.now().strftime(datetime_format)
+	datetime_now = datetime.datetime.now().strftime(datetime_format)
 	if path != '':
 		path_name_dt_ext = path + '/' + name + '_' + datetime_now + ext
 	else:
@@ -35,7 +34,7 @@ def append_dt(path_name_ext, datetime_format):
 
 	return path_name_dt_ext, ext
 
-def save_dt(var, path_name_ext, datetime_format="%y%m%d%H%M", **kwargs):
+def s(var, path_name_ext, datetime_format="%y%m%d%H%M", **kwargs):
 	'''
 	given 'path/path/filename.extension'
 	save var to 'path/path/filename_datetime.entension'
@@ -88,7 +87,7 @@ def find_newest(path_name_ext):
 	all_files = os.listdir(path)
 	all_matches = [x for x in all_files if re.match(fr'{name}_\d{{10}}{ext}', x)]
 	all_dt = [x[len(name)+1:-len(ext)] for x in all_matches]
-	assert all_dt != [], 'cannot find any files, datetime must be 10 digits'
+	assert all_dt != [], 'cannot find any files'
 
 	newest_dt = max(all_dt)
 	if path != '':
@@ -97,7 +96,7 @@ def find_newest(path_name_ext):
 		newest_path_name_ext = name + '_' + newest_dt + ext
 	return newest_path_name_ext, ext
 
-def load_newest(path_name_ext):
+def l(path_name_ext):
 	newest_path_name_ext, ext = find_newest(path_name_ext)
 	if ext == '.pkl':
 		with open(newest_path_name_ext, 'rb') as f:
