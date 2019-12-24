@@ -3,6 +3,7 @@ This is a quick script that allows you to save common file to any location with 
 
 Feel free to download/edit this script, and maybe share your version with me!
 
+# Demo
 
 ```python
 from file_dt import save_dt, load_newest
@@ -52,19 +53,6 @@ display(df)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -95,19 +83,6 @@ display(df)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -156,7 +131,7 @@ save_dt(g, 'output/g.png')
     
 
 
-![png](output_8_2.png)
+![png](output_6_2.png)
 
 
 the default arguments will be `dpi=600, bbox_inches: 'tight'`. And it will try to close the fig after saving the file.
