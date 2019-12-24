@@ -1,7 +1,19 @@
 
-This is a quick script that allows you to save common file to any location with date time appended behind like "filename_1912181212.csv" (`save_dt`). Everytime you want to load it back, just use `load_newest`, it will automatically find the newest file.
+This is a simple script that has only two functions for one purpose. It allows you to save files with date time appended behind the filename but in front of the extension, like `sldt.s(variable, 'filename.csv')` will save *variable* to a file "filename_1912181212.csv". Everytime you want to load it back, use `sldt.l('filename.csv')`, it will automatically find the newest file.
+
+This is useful when you want to save some intermediate result during running your code. But be aware the saved files will keep growing everytime you run.
 
 Feel free to download/edit this script, and maybe share your version with me!
+
+# Installation
+
+```
+pip install sldt
+```
+
+# Supported File Types
+
+It supports only 4 common file types now showed below. Basically it just calls like `pd.DataFrame.to_csv()` as you already familiar.
 
 
 ```python
@@ -27,6 +39,8 @@ sldt.__SUPPORTED_EXT__
 
 
 
+# Demo
+
 ## anything → pkl
 
 
@@ -47,7 +61,7 @@ a_list
     INFO:root:output/a_list_1912240137.pkl saved
     INFO:root:output/a_list_1912240138.pkl saved
     INFO:root:output/a_list_1912240138.pkl loaded
-
+    
 
 
 
@@ -70,9 +84,25 @@ df
 
     INFO:root:output/df_1912240108.csv saved
     INFO:root:output/df_1912240108.csv loaded
+    
 
 
 
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -94,6 +124,8 @@ df
     </tr>
   </tbody>
 </table>
+</div>
+
 
 
 you can pass any argument as to `pd.DataFrame.to_csv()`, if there's no arguments in `save_dt`, the default will be `index=False`.
@@ -112,7 +144,7 @@ sldt.s(g, 'output/g.png')
 ```
 
     INFO:root:output/g_1912240108.png saved
-
+    
 
 Display it using `![](output/g_1912240037.png)` in markdown.
 
@@ -133,7 +165,7 @@ text
 
     INFO:root:output/text_1912240108.txt saved
     INFO:root:output/text_1912240108.txt loaded
-
+    
 
 
 
@@ -142,7 +174,7 @@ text
 
 
 
-## helper functions
+# helper functions
 
 you can save your own file type and load it back using `append_dt` and `find_newest`
 
@@ -169,8 +201,3 @@ sth
     'some strings'
 
 
-
-
-```python
-
-```
