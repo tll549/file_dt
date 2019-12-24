@@ -1,3 +1,5 @@
+__version__ = '1.0.0'
+
 import os
 import re
 import pandas as pd
@@ -6,11 +8,11 @@ import logging
 import pickle
 
 
-SUPPORTED_EXT = ['.pkl', '.csv', '.png', '.txt']
+__SUPPORTED_EXT__ = ['.pkl', '.csv', '.png', '.txt']
 
 def sep_path_name_ext(path_name_ext):
-	ext = [ext_test for ext_test in SUPPORTED_EXT if path_name_ext[-len(ext_test):] == ext_test]
-	assert ext != [], 'please specify extension / extension not supported, currently support: {}'.format(SUPPORTED_EXT)
+	ext = [ext_test for ext_test in __SUPPORTED_EXT__ if path_name_ext[-len(ext_test):] == ext_test]
+	assert ext != [], 'please specify extension / extension not supported, currently support: {}'.format(__SUPPORTED_EXT__)
 	ext = ext[0]
 	path_name = path_name_ext[:-len(ext)]
 	if '/' in path_name or '\\' in path_name:
@@ -76,7 +78,7 @@ def s(var, path_name_ext, datetime_format="%y%m%d%H%M", **kwargs):
 			f.writelines(var)
 
 	else:
-		assert False, 'currently can only handle' + str(SUPPORTED_EXT)
+		assert False, 'currently can only handle' + str(__SUPPORTED_EXT__)
 
 	logging.info(f'{path_name_dt_ext} saved')
 
