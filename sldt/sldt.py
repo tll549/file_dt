@@ -1,4 +1,4 @@
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 import os
 import re
@@ -16,7 +16,6 @@ def sep_path_name_ext(path_name_ext):
 	ext = ext[0]
 	path_name = path_name_ext[:-len(ext)]
 	if '/' in path_name or '\\' in path_name:
-		# splitted = path_name.split('/')
 		splitted = re.split(r'/|\\', path_name)
 		path = '/'.join(splitted[:-1])
 		name = splitted[-1]

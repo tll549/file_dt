@@ -28,7 +28,7 @@ sldt.__version__
 
 
 
-    '1.0.1'
+    '1.0.2'
 
 
 
@@ -58,27 +58,29 @@ logging.getLogger().setLevel(logging.INFO)
 
 ```python
 a_list = ['a', 0.1, False]
-
-# save two files for demo
+# save
 sldt.s(a_list, 'output/a_list.pkl')
+
+# save the second file for demo
 import time
 time.sleep(60)
+a_list = ['b', 0.2, True]
 sldt.s(a_list, 'output/a_list.pkl')
 
-# it will load the newest (which is the later one) back
+# load the newest (which is the later one) back
 a_list = sldt.l('output/a_list.pkl')
 a_list
 ```
 
-    INFO:root:output/a_list_1912240321.pkl saved
-    INFO:root:output/a_list_1912240322.pkl saved
-    INFO:root:output/a_list_1912240322.pkl loaded
-    
+    INFO:root:output/a_list_1912240334.pkl saved
+    INFO:root:output/a_list_1912240335.pkl saved
+    INFO:root:output/a_list_1912240335.pkl loaded
 
 
 
 
-    ['a', 0.1, False]
+
+    ['b', 0.2, True]
 
 
 
@@ -94,27 +96,9 @@ df = sldt.l('output/df.csv')
 df
 ```
 
-    INFO:root:output/df_1912240322.csv saved
-    INFO:root:output/df_1912240322.csv loaded
-    
+    INFO:root:output/df_1912240335.csv saved
+    INFO:root:output/df_1912240335.csv loaded
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -136,15 +120,11 @@ df
     </tr>
   </tbody>
 </table>
-</div>
-
-
-
 you can pass any argument as to `pd.DataFrame.to_csv()`, if there's no arguments in `save_dt`, the default will be `index=False`.
 
 For example, `save_dt(df, 'output/df.csv', sep=';')`
 
-## figure → png
+## figure -> png
 
 
 ```python
@@ -155,14 +135,14 @@ g = sns.catplot(x="time", y="pulse", hue="kind", data=exercise)
 sldt.s(g, 'output/g.png')
 ```
 
-    INFO:root:output/g_1912240322.png saved
-    
+    INFO:root:output/g_1912240335.png saved
+
 
 Display it using `![](output/g_1912240037.png)` in markdown.
 
 the default arguments will be `dpi=600, bbox_inches='tight'`. And it will try to close the fig after saving the file.
 
-## string → txt
+## string -> txt
 
 
 ```python
@@ -175,9 +155,9 @@ text = sldt.l('output/text.txt')
 text
 ```
 
-    INFO:root:output/text_1912240322.txt saved
-    INFO:root:output/text_1912240322.txt loaded
-    
+    INFO:root:output/text_1912240335.txt saved
+    INFO:root:output/text_1912240335.txt loaded
+
 
 
 
@@ -224,7 +204,7 @@ sldt.find_newest('output/text.txt')
 
 
 
-    ('output/text_1912240322.txt', '.txt')
+    ('output/text_1912240335.txt', '.txt')
 
 
 
@@ -240,7 +220,7 @@ except:
 ```
 
     file exist
-    
+
 
 Similarly, load only if you haven't save the needed file
 
@@ -255,5 +235,5 @@ except:
     sldt.s(result, 'output/result.csv')
 ```
 
-    INFO:root:output/result_1912240322.csv saved
-    
+    INFO:root:output/result_1912240335.csv saved
+
