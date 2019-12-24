@@ -22,14 +22,19 @@ import sldt
 
 
 ```python
-# launch logger to see info when saving and loading files
-import logging
-logging.getLogger().setLevel(logging.INFO)
+sldt.__version__
 ```
 
 
+
+
+    '1.0.1'
+
+
+
+
 ```python
-sldt.__SUPPORTED_EXT__
+sldt.SUPPORTED_EXT
 ```
 
 
@@ -41,7 +46,14 @@ sldt.__SUPPORTED_EXT__
 
 # Demo
 
-## anything → pkl
+
+```python
+# launch logger to see info when saving and loading files
+import logging
+logging.getLogger().setLevel(logging.INFO)
+```
+
+## anything -> pkl
 
 
 ```python
@@ -58,9 +70,9 @@ a_list = sldt.l('output/a_list.pkl')
 a_list
 ```
 
-    INFO:root:output/a_list_1912240137.pkl saved
-    INFO:root:output/a_list_1912240138.pkl saved
-    INFO:root:output/a_list_1912240138.pkl loaded
+    INFO:root:output/a_list_1912240321.pkl saved
+    INFO:root:output/a_list_1912240322.pkl saved
+    INFO:root:output/a_list_1912240322.pkl loaded
     
 
 
@@ -70,7 +82,7 @@ a_list
 
 
 
-## pandas dataframe → csv
+## pandas dataframe -> csv
 
 
 ```python
@@ -82,8 +94,8 @@ df = sldt.l('output/df.csv')
 df
 ```
 
-    INFO:root:output/df_1912240108.csv saved
-    INFO:root:output/df_1912240108.csv loaded
+    INFO:root:output/df_1912240322.csv saved
+    INFO:root:output/df_1912240322.csv loaded
     
 
 
@@ -143,12 +155,12 @@ g = sns.catplot(x="time", y="pulse", hue="kind", data=exercise)
 sldt.s(g, 'output/g.png')
 ```
 
-    INFO:root:output/g_1912240108.png saved
+    INFO:root:output/g_1912240322.png saved
     
 
 Display it using `![](output/g_1912240037.png)` in markdown.
 
-the default arguments will be `dpi=600, bbox_inches: 'tight'`. And it will try to close the fig after saving the file.
+the default arguments will be `dpi=600, bbox_inches='tight'`. And it will try to close the fig after saving the file.
 
 ## string → txt
 
@@ -163,8 +175,8 @@ text = sldt.l('output/text.txt')
 text
 ```
 
-    INFO:root:output/text_1912240108.txt saved
-    INFO:root:output/text_1912240108.txt loaded
+    INFO:root:output/text_1912240322.txt saved
+    INFO:root:output/text_1912240322.txt loaded
     
 
 
@@ -182,7 +194,7 @@ you can save your own file type and load it back using `append_dt` and `find_new
 ```python
 import pickle
 
-output_filename = sldt.append_dt('output/sth.pkl', datetime_format="%y%m%d%H%M")[0] # it returns a tuple as (filename, extension)
+output_filename = sldt.append_dt('output/sth.pkl', datetime_format="%y%m%d%H%M")[0]
 with open(output_filename, 'wb') as f:
     pickle.dump('some strings', f)
 ```
@@ -201,3 +213,47 @@ sth
     'some strings'
 
 
+
+`find_newest` returns a tuplet (filename, extension)
+
+
+```python
+sldt.find_newest('output/text.txt')
+```
+
+
+
+
+    ('output/text_1912240322.txt', '.txt')
+
+
+
+It can be served as checking whether file is exist
+
+
+```python
+try:
+    sldt.find_newest('output/text.txt')
+    print('file exist')
+except:
+    print('no file exist')
+```
+
+    file exist
+    
+
+Similarly, load only if you haven't save the needed file
+
+
+```python
+try:
+    sldt.l('output/result.csv')
+except:
+    # do some calculation
+    result = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+    # save calculation result
+    sldt.s(result, 'output/result.csv')
+```
+
+    INFO:root:output/result_1912240322.csv saved
+    
