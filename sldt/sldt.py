@@ -1,4 +1,9 @@
-__version__ = '1.0.3'
+__version__ = '1.0.4'
+
+'''
+TODO:
+l implement kwargs?
+'''
 
 import os
 import re
@@ -104,9 +109,6 @@ def l(path_name_ext, **kwargs):
 			data = pickle.load(f)
 
 	elif ext == '.csv':
-		if kwargs == {}: # default kwargs
-			kwargs = {'index': False}
-			
 		data = pd.read_csv(newest_path_name_ext, **kwargs)
 
 	elif ext == '.txt':
