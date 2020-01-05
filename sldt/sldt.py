@@ -1,4 +1,4 @@
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 import os
 import re
@@ -97,14 +97,17 @@ def find_newest(path_name_ext):
 		newest_path_name_ext = name + '_' + newest_dt + ext
 	return newest_path_name_ext, ext
 
-def l(path_name_ext):
+def l(path_name_ext, **kwargs):
 	newest_path_name_ext, ext = find_newest(path_name_ext)
 	if ext == '.pkl':
 		with open(newest_path_name_ext, 'rb') as f:
 			data = pickle.load(f)
 
 	elif ext == '.csv':
-		data = pd.read_csv(newest_path_name_ext)
+		if kwargs == {}: # default kwargs
+			kwargs = {'index': False}
+			
+		data = pd.read_csv(newest_path_name_ext, **kwargs)
 
 	elif ext == '.txt':
 		with open(newest_path_name_ext, 'r') as f:
